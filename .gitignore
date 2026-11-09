@@ -1,0 +1,10 @@
+# Generated from staticR by bin/mod_sdk_release.py (its IGNORE lists).
+build/
+dist/
+__pycache__/
+.venv/
+venv/
+*.egg-info/
+*.wasm
+*.staticrmod
+*.pyc

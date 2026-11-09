@@ -1,0 +1,9 @@
+# staticR Tier 1 sample mod (docs/design/mod-sdk.md M.2d D5): keeps state, which a Tier 0 rule cannot.
+# Install: copy this file and oot-hitcount-wasm.wasm (built from oot-hitcount-wasm.c) into
+# <config dir>/staticr_mods/. The count is saved in staticr_mods/oot-hitcount-wasm.json.
+format = "staticr.mod/1"
+id = "oot-hitcount-wasm"
+name = "Hit counter (WASM)"
+description = "Link flashes red with lightning each time he is hurt; the hits are counted across sessions."
+game = "oot"
+wasm = "oot-hitcount-wasm.wasm"

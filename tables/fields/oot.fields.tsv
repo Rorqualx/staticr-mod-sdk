@@ -1,0 +1,32 @@
+# format: staticr.mod-fields/1
+# staticR mod field table, OoT NTSC 1.2 (docs/design/mod-sdk.md M.2c, C1).
+#
+# Named guest fields a declarative (Tier 0) mod reads and writes. Checked by
+# bin/mod_fields_check.py against configs/diag/oot.diag.tsv + oot.verified.json.
+#
+# columns: name <TAB> base <TAB> offset <TAB> type <TAB> source
+#   base    play | actor (the event's argument of that name), abs (offset is a KSEG0
+#           address), or an earlier row of type ptr (the u32 stored there is the base).
+#   type    u8 s8 u16 s16 u32 s32 f32, or ptr (a u32 guest pointer; usable as a base).
+#   source  diag:<key>[+N] = the offset IS that diag-profile value (+N bytes); the checker
+#           refuses a mismatch or a key whose verdict isn't MATCH. Anything else is a
+#           citation for a field the diag profile doesn't cover, and is not machine-checked.
+#
+# The gameplay state (play) is the first argument of every play_* event and the second of
+# the actor_* events (configs/mods/events.tsv).
+play.frames	play	0x9C	u32	diag:gamestate_frames_off
+play.input_cur_buttons	play	0x14	u16	diag:state_input_off
+player	play	0x1C44	ptr	diag:player_head_off
+player.pos_x	player	0x24	f32	diag:player_pos_off
+player.pos_y	player	0x28	f32	diag:player_pos_off+4
+player.pos_z	player	0x2C	f32	diag:player_pos_off+8
+player.speed	player	0x68	f32	diag:actor_speed_off
+player.state_flags1	player	0x66C	u32	diag:player_stateflags1_off
+player.state_flags2	player	0x670	u32	diag:player_stateflags2_off
+player.shock_timer	player	0x881	u8	configs/highfps/oot.pcadence.tsv class 6 (Player_UpdateBodyShock ticks it down; set 40 on an electric hit); written to 40 in oot-parity scenario s1b, lightning seen on Link
+player.invincibility_timer	player	0xA68	s8	docs/design/oot-parity-scope.md Step 1 Player census (invincibility +0xA68); written to 20 in oot-parity scenario s1b, Link flashes red
+actor.pos_x	actor	0x24	f32	diag:actor_world_pos_off
+actor.pos_y	actor	0x28	f32	diag:actor_world_pos_off+4
+actor.pos_z	actor	0x2C	f32	diag:actor_world_pos_off+8
+actor.yaw	actor	0x32	s16	diag:actor_world_yaw_off
+actor.speed	actor	0x68	f32	diag:actor_speed_off

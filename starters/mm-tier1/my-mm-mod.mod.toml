@@ -1,0 +1,7 @@
+# my-mm-mod: a staticR Tier 1 (WASM) mod for mm. Made by `staticr-mods new`.
+format = "staticr.mod/1"
+id = "my-mm-mod"
+name = "my-mm-mod"
+description = "Logs each scene start."
+game = "mm"
+wasm = "my-mm-mod.wasm"

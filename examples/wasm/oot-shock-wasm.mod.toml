@@ -1,0 +1,9 @@
+# staticR Tier 1 sample mod (docs/design/mod-sdk.md M.2d D3): the shock flash, in C, run as WASM.
+# Install: copy this file and oot-shock-wasm.wasm (built from oot-shock-wasm.c) into
+# <config dir>/staticr_mods/.
+format = "staticr.mod/1"
+id = "oot-shock-wasm"
+name = "Shock flash (WASM)"
+description = "D-pad Left: Link flashes red with lightning crackling over him (no damage)."
+game = "oot"
+wasm = "oot-shock-wasm.wasm"

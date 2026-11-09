@@ -1,0 +1,20 @@
+# staticR Tier 0 sample mod (docs/design/mod-sdk.md M.2c): press D-pad Left and Link gets the
+# electric-shock look, the red flash plus lightning across his body, with a short rumble.
+# Install: copy into <config dir>/staticr_mods/ (the host loads every *.mod.toml there).
+format = "staticr.mod/1"
+id = "oot-shock-flash"
+name = "Shock flash"
+description = "D-pad Left: Link flashes red with lightning crackling over him (no damage)."
+game = "oot"
+
+[[rule]]
+on = "play_update"
+pad_pressed = "DLEFT"
+# both timers count down once per game update (20 per second): 40 = 2 s of lightning
+cooldown = 40
+rumble = 10
+set = [
+  { field = "player.invincibility_timer", value = 20 },
+  { field = "player.shock_timer", value = 40 },
+]
+log = "shock flash"

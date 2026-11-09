@@ -1,0 +1,40 @@
+# my-shock: a staticR Tier 0 (declarative) mod for oot. Made by `staticr-mods new`.
+# A rule fires on an event (on = ...), when its conditions hold, and sets or adds to named fields.
+# Check it: staticr-mods check .    Package it: staticr-mods pack .
+# Install: the launcher's Mods page (Add...) takes the .staticrmod, or copy this file into
+# <config dir>/staticr_mods/.
+format = "staticr.mod/1"
+id = "my-shock"
+name = "my-shock"
+description = "D-pad Left: Link flashes red with lightning over him (no damage)."
+game = "oot"
+
+[[rule]]
+on = "play_update"        # events: boot play_init play_main play_update play_draw play_destroy actor_init actor_draw
+pad_pressed = "DLEFT"     # buttons: A B Z START DUP DDOWN DLEFT DRIGHT L R CUP CDOWN CLEFT CRIGHT
+cooldown = 40             # events before the rule may fire again
+rumble = 10               # events of rumble
+set = [
+  { field = "player.invincibility_timer", value = 20 },
+  { field = "player.shock_timer", value = 40 },
+]
+log = "my-shock: shock"
+# when = [{ field = "player.speed", op = ">", value = 0 }]   # ops: == != < <= > >= & !&
+#
+# Fields of oot (name: type, base):
+#   play.frames: u32, play
+#   play.input_cur_buttons: u16, play
+#   player: ptr, play
+#   player.pos_x: f32, play
+#   player.pos_y: f32, play
+#   player.pos_z: f32, play
+#   player.speed: f32, play
+#   player.state_flags1: u32, play
+#   player.state_flags2: u32, play
+#   player.shock_timer: u8, play
+#   player.invincibility_timer: s8, play
+#   actor.pos_x: f32, actor
+#   actor.pos_y: f32, actor
+#   actor.pos_z: f32, actor
+#   actor.yaw: s16, actor
+#   actor.speed: f32, actor

@@ -1,0 +1,23 @@
+# format: staticr.mod-events/1
+# staticR mod event catalogue (docs/design/mod-sdk.md M.2a).
+#
+# One row per event a port can fire. The per-title hook configs
+# (configs/hooks/<title>.mod-events.hooks.tsv) place the calls; every call is
+#     staticr_mod_event(rdram, ctx, <id>, "<event>", <a0>, <a1>);
+# into host/staticr_scale_defaults.c, which is a no-op unless a listener is
+# subscribed or STATICR_MOD_EVENTS_DEBUG is set. Argument order is fixed per
+# event here, whatever the guest function's own parameter order.
+#
+# compat: the N64Recomp event name an existing .nrm mod subscribes to for the same
+# point, when there is one. These are matched by name and position only (the event fires
+# at the ENTRY of the named function), not by any upstream implementation. "-" = none.
+#
+# columns: id <TAB> event <TAB> a0 <TAB> a1 <TAB> compat <TAB> fires
+0	boot	-	-	recomp_on_init	once, at the entry of the game's Main thread function
+1	play_init	play	-	recomp_on_play_init	entry of Play_Init (a gameplay scene starts)
+2	play_main	play	-	recomp_on_play_main	entry of Play_Main (once per gameplay frame)
+3	play_update	play	-	recomp_on_play_update	entry of Play_Update (once per gameplay update)
+4	play_draw	play	-	-	entry of Play_Draw (once per drawn gameplay frame)
+5	play_destroy	play	-	-	entry of Play_Destroy (a gameplay scene ends)
+6	actor_init	actor	play	-	entry of Actor_Init (once per spawned actor)
+7	actor_draw	actor	play	-	entry of Actor_Draw (once per drawn actor per frame)

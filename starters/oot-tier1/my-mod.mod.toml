@@ -1,0 +1,7 @@
+# my-mod: a staticR Tier 1 (WASM) mod for oot. Made by `staticr-mods new`.
+format = "staticr.mod/1"
+id = "my-mod"
+name = "my-mod"
+description = "Logs Link's speed each time it changes."
+game = "oot"
+wasm = "my-mod.wasm"
